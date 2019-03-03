@@ -3,7 +3,7 @@ import SearchBook from './components/SearchBook'
 import BookList from "./components/BookList";
 import * as _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Alert, Col, Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Row} from 'reactstrap';
+import {Col, Collapse, Container, Navbar, NavbarBrand, NavbarToggler, Row} from 'reactstrap';
 import BookService from './services/BookService';
 
 class App extends Component {
@@ -29,30 +29,22 @@ class App extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">React Book Finder</NavbarBrand>
+          <NavbarBrand href="/">alexandria</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <SearchBook className="header" onSearchQueryChange={
-                  (term) => {
-                    bookSearch(term);
-                    this.setState({query: term});
-                  }}/>
-              </NavItem>
-            </Nav>
           </Collapse>
         </Navbar>
-        <Container>
+        <Container className="align-content-center">
           <Row>
-            <Col xs="12">
-              <Alert color="secondary" className="clearfix">
-                Displaying books on: {this.state.query}
-              </Alert>
-
+            <Col xs="12" className="m-2">
+              <SearchBook className="header" onSearchQueryChange={
+                (term) => {
+                  bookSearch(term);
+                  this.setState({query: term});
+                }}/>
             </Col>
           </Row>
-          <BookList className="clearfix" books={this.state.books}/>
+          <BookList className="m-2 align-content-center" books={this.state.books}/>
         </Container>
       </div>
     );
