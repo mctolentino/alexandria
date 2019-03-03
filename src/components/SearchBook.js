@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Input from "reactstrap/es/Input";
+import {Button, InputGroup, InputGroupAddon} from "reactstrap";
 
 class SearchBook extends Component {
   constructor(props) {
@@ -9,15 +10,23 @@ class SearchBook extends Component {
 
   render() {
     return (
-      <Input
-        value={this.state.query}
-        onChange={event => this.onInputChange(event.target.value)}
-      />
+      <div>
+        <InputGroup>
+          <Input placeholder="Search..." value={this.state.query}
+                 onChange={event => this.onInputChange(event.target.value)}/>
+          <InputGroupAddon addonType="append">
+            <Button color="secondary"
+                    onClick={() => this.onClickSearch(this.state.query)}>Search</Button></InputGroupAddon>
+        </InputGroup>
+      </div>
     );
   }
 
   onInputChange(query) {
     this.setState({query});
+  }
+
+  onClickSearch(query){
     this.props.onSearchQueryChange(query);
   }
 }
